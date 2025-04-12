@@ -1,2 +1,137 @@
-# CSC151-0901
-Java Programming
+
+import java.util.Scanner;
+
+// Abstract class Shape defines the structure for all shapes
+abstract class Shape {
+    abstract double area();
+    abstract double perimeter();
+}
+
+// Circle class that extends Shape
+class Circle extends Shape {
+    private double radius;
+
+    // Constructor
+    Circle(double radius) {
+        this.radius = radius;
+    }
+
+    // Implement area method
+    double area() {
+        return Math.PI * radius * radius;
+    }
+
+    // Implement perimeter method
+    double perimeter() {
+        return 2 * Math.PI * radius;
+    }
+}
+
+// Rectangle class that extends Shape
+class Rectangle extends Shape {
+    private double width;
+    private double height;
+
+    // Constructor
+    Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    // Implement area method
+    double area() {
+        return width * height;
+    }
+
+    // Implement perimeter method
+    double perimeter() {
+        return 2 * (width + height);
+    }
+}
+
+// Triangle class that extends Shape
+class Triangle extends Shape {
+    private double base;
+    private double height;
+    private double side1;
+    private double side2;
+
+    // Constructor
+    Triangle(double base, double height, double side1, double side2) {
+        this.base = base;
+        this.height = height;
+        this.side1 = side1;
+        this.side2 = side2;
+    }
+
+    // Implement area method
+    double area() {
+        return (base * height) / 2;
+    }
+
+    // Implement perimeter method
+    double perimeter() {
+        return base + side1 + side2;
+    }
+}
+
+// Main class that runs the program
+public class ShapeCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Display menu
+            System.out.println("\nChoose a shape:");
+            System.out.println("1. Circle");
+            System.out.println("2. Rectangle");
+            System.out.println("3. Triangle");
+            System.out.println("4. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+
+            if (choice == 4) {
+                System.out.println("Exiting program. Goodbye!");
+                break;
+            }
+
+            Shape shape = null;
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter radius: ");
+                    double radius = scanner.nextDouble();
+                    shape = new Circle(radius);
+                    break;
+                case 2:
+                    System.out.print("Enter width: ");
+                    double width = scanner.nextDouble();
+                    System.out.print("Enter height: ");
+                    double height = scanner.nextDouble();
+                    shape = new Rectangle(width, height);
+                    break;
+                case 3:
+                    System.out.print("Enter base: ");
+                    double base = scanner.nextDouble();
+                    System.out.print("Enter height: ");
+                    double triHeight = scanner.nextDouble();
+                    System.out.print("Enter side 1: ");
+                    double side1 = scanner.nextDouble();
+                    System.out.print("Enter side 2: ");
+                    double side2 = scanner.nextDouble();
+                    shape = new Triangle(base, triHeight, side1, side2);
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+                    continue;
+            }
+
+            // Output results
+            System.out.printf("Area: %.2f\n", shape.area());
+            System.out.printf("Perimeter: %.2f\n", shape.perimeter());
+        }
+
+        scanner.close();
+    }
+}
